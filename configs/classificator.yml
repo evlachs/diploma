@@ -1,0 +1,6 @@
+services:
+  - telegram:
+      - udp:
+        - video_call:
+            - avg_bitrate: 100
+            - avg_pkt_size: 100
