@@ -1,6 +1,10 @@
 services:
   - telegram:
-      - udp:
-        - video_call:
-            - avg_bitrate: 100
-            - avg_pkt_size: 100
+    - video_call:
+        - l3_layer: 'udp'
+        - avg_bitrate: 500-1000
+        - avg_pkt_size: 100-500
+    - audio_call:
+        - l3_layer: 'udp'
+        - avg_bitrate: 100-500
+        - avg_pkt_size: 0-100
