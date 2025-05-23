@@ -1,10 +1,10 @@
 from classificator import Classificator
+from config_handler import ConfigHandler
+from dump_handler import DumpHandler
 
-dr = Classificator('dumps/telegram_audio_common_flow.pcapng', 'configs/services.yml')
-all_sessions = dr.get_protocol_sessions('UDP')
+dump = DumpHandler('dumps/telegram_audio_common_flow.pcapng')
+print(list(dump.get_all_sessions())[0].split()[0])
 
-for session_name, session in all_sessions.items():
-    params = dr.get_session_params('udp', session)
-    classification = dr.check_session_affiliation(session_name, params)
-    if classification[0]:
-        print(classification[1])
+# if __name__ == '__main__':
+#     config = ConfigHandler('configs/services.yml')
+#

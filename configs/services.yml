@@ -1,10 +1,9 @@
 services:
-  - telegram:
-    - video_call:
-      - parent_protocol: 'udp'
-      - avg_bitrate: [800000, 1000000]
-      - avg_pkt_size: [500, 1500]
-    - audio_call:
-      - parent_protocol: 'udp'
-      - avg_bitrate: [10000, 100000]
-      - avg_pkt_size: [100, 300]
+  - UDP:
+    - telegram:
+      - video_call:
+        - avg_bitrate: [800000, 1000000]
+        - avg_pkt_size: [500, 1500]
+      - audio_call:
+        - avg_bitrate: [10000, 100000]
+        - avg_pkt_size: [100, 300]
