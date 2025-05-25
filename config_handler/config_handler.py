@@ -1,31 +1,30 @@
-from idlelib.debugger_r import restart_subprocess_debugger
-
 import yaml
 
 
-class ConfigHandler:
+class Config:
     def __init__(self, config_path: str):
-        self.path = config_path
-        self.config = self.__read_config_file()
+        self.__path = config_path
+        self.config_params = self.__read_config_file()
+        self.classification_params = self.__get_classification_params()
 
     def __read_config_file(self) -> dict:
-        with open(self.path) as file:
+        with open(self.__path) as file:
             config = yaml.safe_load(file)
         return config
 
-    def get_service_attributes_params(self):
-        """NEED TO UPDATE"""
-        pass
-        # result = {}
-        # def extract_config_params(config):
-        #     if isinstance(config, list):
-        #         for value in config:
-        #             extract_config_params(value)
-        #     elif isinstance(config, dict):
-        #         for k, v in config.items():
-        #             result.join(v)
-        #             extract_config_params(v)
-        #     else:
-        #         result.join(config)
-        # extract_config_params(self.config['services'])
-        # return result
+    def __get_classification_params(self) -> dict:
+        res = {}
+        def extract_classification_params(config, result, count):
+            if count == 3:
+                res[result.lstrip('.')] = config[0] | config[1]
+            elif isinstance(config, dict):
+                count += 1
+                for value in config:
+                    result += f'.{value}'
+                    extract_classification_params(config[value], result, count)
+            else:
+                for value in config:
+                    extract_classification_params(value, result, count)
+            return res
+        extract_classification_params(self.config_params['services'], '', 0)
+        return res
