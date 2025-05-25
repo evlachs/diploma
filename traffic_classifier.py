@@ -2,12 +2,11 @@ from classificator import Classificator
 from config_handler import Config
 from dump_handler import Dump
 import argparse
-
+from datetime import datetime
 
 DESCRIPTION = 'Software for classifying network traffic in a pcap file'
 CONFIG_PATH = 'configs/services.yml'
-SESSIONS_PATH = 'dumps'
-CLASSIFIED_ONLY = True
+SESSIONS_PATH = datetime.now().strftime('%d.%m.%y')
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=DESCRIPTION)
@@ -23,15 +22,22 @@ if __name__ == '__main__':
         '-o',
         '--classified_only',
         action='store_false',
-        default=CLASSIFIED_ONLY,
+        default=True,
         help='displays classification result for all sessions'
     )
     parser.add_argument(
         '-s',
         '--sessions_path',
-        action='store_false',
-        default=CLASSIFIED_ONLY,
+        action='store',
+        default=SESSIONS_PATH,
         help='path/to/directory for save classified sessions .pcap file'
+    )
+    parser.add_argument(
+        '-d',
+        '--save_disabled',
+        action='store_true',
+        default=False,
+        help='disable sessions saving'
     )
     args = parser.parse_args()
     config = Config(args.config_file)
@@ -46,3 +52,6 @@ if __name__ == '__main__':
             if result[0]: print(result[1])
         else:
             print(result[1])
+        if result[0] and not args.save_disabled:
+            print(args.save_disabled)
+            dump.save_session(session_packets, result[2], args.sessions_path)

@@ -7,7 +7,7 @@ class Classificator:
         self.session_name = session_name
         self.session_packets = session_packets
 
-    def classify_session(self, services_params: dict[str, dict], session_params: dict[str, int | str]) -> [bool, str]:
+    def classify_session(self, services_params: dict[str, dict], session_params: dict[str, int | str]) -> list:
         result = "Session {} is classified: {}"
         session_proto = session_params['parent_protocol']
         session_bitrate = session_params['avg_bitrate']
@@ -19,7 +19,7 @@ class Classificator:
             bitrate = services_params[service]['avg_bitrate']
             pkt_size = services_params[service]['avg_pkt_size']
             if bitrate[0] <= session_bitrate <= bitrate[1] and pkt_size[0] <= session_pkt_size <= pkt_size[1]:
-                return [True, result.format(self.session_name, service)]
+                return [True, result.format(self.session_name, service), service]
         return [False, f"Session {self.session_name} is not classified"]
 
     def get_session_params(self):

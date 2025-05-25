@@ -18,5 +18,10 @@ class Dump:
     def save_session(session: PacketList, name: str, path: str) -> None:
         if not os.path.exists(path):
             os.makedirs(path)
-        """NEED TO UPDATE"""
-        wrpcapng(f'{path}/{name}', session)
+        count = 0
+        session_path = f'{path}/{name}({count})'
+        while os.path.exists(session_path):
+            count += 1
+            session_path = f'{path}/{name}({count})'
+
+        wrpcapng(session_path, session)
