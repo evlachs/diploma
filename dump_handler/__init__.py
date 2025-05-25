@@ -1,1 +1,1 @@
-from .dump_handler import DumpHandler
+from .dump_handler import Dump

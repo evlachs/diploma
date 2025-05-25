@@ -2,7 +2,7 @@ from typing import Any
 from scapy.all import rdpcap, PacketList
 
 
-class DumpHandler:
+class Dump:
     def __init__(self, pcap_file_path: str):
         self.dump = rdpcap(pcap_file_path)
 
