@@ -19,7 +19,7 @@ class Classificator:
             bitrate = services_params[service]['avg_bitrate']
             pkt_size = services_params[service]['avg_pkt_size']
             if bitrate[0] <= session_bitrate <= bitrate[1] and pkt_size[0] <= session_pkt_size <= pkt_size[1]:
-                return result.format(self.session_name, service)
+                return [True, result.format(self.session_name, service)]
         return [False, f"Session {self.session_name} is not classified"]
 
     def get_session_params(self):

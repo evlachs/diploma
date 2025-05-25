@@ -1,6 +1,6 @@
+import os
 from typing import Any
-from scapy.all import rdpcap, PacketList
-
+from scapy.all import rdpcap, wrpcapng, PacketList
 
 class Dump:
     def __init__(self, pcap_file_path: str):
@@ -11,6 +11,12 @@ class Dump:
         protocol_sessions = packet_list.sessions()
         return protocol_sessions
 
-    def get_all_sessions(self):
+    def get_all_sessions(self) -> dict[str, Any | PacketList]:
         return self.dump.sessions()
 
+    @staticmethod
+    def save_session(session: PacketList, name: str, path: str) -> None:
+        if not os.path.exists(path):
+            os.makedirs(path)
+        """NEED TO UPDATE"""
+        wrpcapng(f'{path}/{name}', session)
