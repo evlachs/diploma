@@ -15,7 +15,7 @@ class Dump:
         return self.dump.sessions()
 
     @staticmethod
-    def save_session(session: PacketList, name: str, path: str) -> None:
+    def save_session(session: PacketList, name: str, path: str) -> str:
         if not os.path.exists(path):
             os.makedirs(path)
         count = 0
@@ -25,3 +25,4 @@ class Dump:
             session_path = f'{path}/{name}({count})'
 
         wrpcapng(session_path, session)
+        return session_path
