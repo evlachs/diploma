@@ -1,3 +1,6 @@
 *.pyc
 .idea
 venv
+logs
+saved_sessions
+*.pcap*
