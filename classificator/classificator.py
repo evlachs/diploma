@@ -22,7 +22,7 @@ class Classificator:
                 return [True, result.format(self.session_name, service), service]
         return [False, f"Session {self.session_name} is not classified"]
 
-    def get_session_params(self):
+    def get_session_params(self) -> dict:
         size = 0
         packet_count = 0
         session_proto = self.session_name.split()[0]

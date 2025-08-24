@@ -16,7 +16,7 @@ class Config:
         res = {}
         def extract_classification_params(config, result, count):
             if count == 3:
-                res[result.lstrip('.')] = config[0] | config[1]
+                res[result.lstrip('.')] = config
             elif isinstance(config, dict):
                 count += 1
                 for value in config:

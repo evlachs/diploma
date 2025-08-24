@@ -2,6 +2,7 @@ import os
 from typing import Any
 from scapy.all import rdpcap, wrpcapng, PacketList
 
+
 class Dump:
     def __init__(self, pcap_file_path: str):
         self.dump = rdpcap(pcap_file_path)
@@ -19,10 +20,10 @@ class Dump:
         if not os.path.exists(path):
             os.makedirs(path)
         count = 0
-        session_path = f'{path}/{name}({count})'
+        session_path = f'{path}/{name}({count}).pcapng'
         while os.path.exists(session_path):
             count += 1
-            session_path = f'{path}/{name}({count})'
+            session_path = f'{path}/{name}({count}).pcapng'
 
         wrpcapng(session_path, session)
         return session_path

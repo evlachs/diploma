@@ -2,8 +2,8 @@ services:
   - UDP:
     - telegram:
       - video_call:
-        - avg_bitrate: [800000, 1000000]
-        - avg_pkt_size: [500, 1500]
+          avg_bitrate: [207938, 1132351]
+          avg_pkt_size: [312, 936]
       - audio_call:
-        - avg_bitrate: [10000, 100000]
-        - avg_pkt_size: [100, 300]
+          avg_bitrate: [29850, 57131]
+          avg_pkt_size: [134, 251]

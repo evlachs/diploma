@@ -61,7 +61,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     config = Config(args.config_file)
-    config_params = config.classification_params
+    classification_params = config.classification_params
     dump = Dump(args.input_file)
     sessions = dump.get_all_sessions()
     for session_name, session_packets in sessions.items():
@@ -70,7 +70,7 @@ if __name__ == '__main__':
         if args.analyze:
             logger.info(f'{session_name}: {session_params}')
             continue
-        result = classificator.classify_session(config_params, session_params)
+        result = classificator.classify_session(classification_params, session_params)
         if args.classified_only:
             if result[0]:
                 logger.info(result[1])
